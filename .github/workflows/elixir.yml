@@ -1,0 +1,53 @@
+name: Elixir Direct Pipeline (no mix)
+
+on: 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    name: Compilar y Ejecutar por Carpetas
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar BEAM (Erlang y Elixir)
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: '1.17'
+          otp-version: '26'
+      
+      - name: Compilar todos los módulos a ebin
+        run: |
+          mkdir -p ebin
+          # Compila recursivamente los .ex dentro de cualquier subcarpeta lib
+          elixirc **/lib/*.ex -o ebin
+
+      - name: Ejecutar Problema 1
+        run: |
+          echo "=== EJECUTANDO PROBLEMA 1 ==="
+          elixir -pa ebin problema1/main.exs
+
+      - name: Ejecutar Problema 2
+        run: |
+          echo "=== EJECUTANDO PROBLEMA 2 ==="
+          elixir -pa ebin problema2/main.exs
+
+      - name: Reportar en consola si falló
+        if: failure()
+        run: |
+          echo "::error title=Fallo de Validación::Uno o ambos problemas fallaron la ejecución."
+
+      - name: Generar Resumen del Job
+        if: always()
+        run: |
+          echo "## Reporte de Ejecución - Elixir Direct Pipeline" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "### Status: ✅ Ambos problemas se ejecutaron correctamente en sus carpetas." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### Status: ❌ Ocurrió un error al compilar o ejecutar los problemas." >> $GITHUB_STEP_SUMMARY
+          fi
