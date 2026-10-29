@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir -p ebin
           # Compila recursivamente los .ex dentro de cualquier subcarpeta lib
-          elixirc **/lib/*.ex -o ebin
+          elixirc $(find . -type f -name "*.ex" -not -path "./ebin/*") -o ebin
 
       - name: Ejecutar Problema 1
         run: |
