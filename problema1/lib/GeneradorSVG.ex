@@ -38,8 +38,8 @@ defmodule GeneradorSVG do
     max_f = coordenadas |> Enum.map(&elem(&1, 0)) |> Enum.max()
     max_c = coordenadas |> Enum.map(&elem(&1, 1)) |> Enum.max()
 
-    ancho = max_c * @tamano
-    alto = max_f * @tamano
+    ancho = (max_c + 1) * @tamano
+    alto = (max_f + 1) * @tamano
 
     # Dibujamos las celdas directamente desde el mapa de coordenadas
     celdas =
@@ -67,9 +67,11 @@ defmodule GeneradorSVG do
   end
 
   defp dibujar_celda(%Terreno{simbolo: simbolo, nombre: nombre}, col, fila) do
-    # Conversión a coordenadas base 0 para el lienzo SVG
-    px = (col - 1) * @tamano
-    py = (fila - 1) * @tamano
+    # Cálculo de la esquina superior izquierda de la celda {fila, col}:
+    px = col * @tamano
+    py = fila * @tamano
+
+    # Centro de la celda (para el texto y la línea polyline del camino):
     cx = px + div(@tamano, 2)
     cy = py + div(@tamano, 2)
 
@@ -89,8 +91,8 @@ defmodule GeneradorSVG do
     puntos =
       pos
       |> Enum.map(fn {f, c} ->
-        cx = (c - 1) * @tamano + div(@tamano, 2)
-        cy = (f - 1) * @tamano + div(@tamano, 2)
+        cx = c * @tamano + div(@tamano, 2)
+        cy = f * @tamano + div(@tamano, 2)
         "#{cx},#{cy}"
       end)
       |> Enum.join(" ")

@@ -27,12 +27,12 @@ defmodule ReporteCSV do
       |> Stream.map(fn {recorrido, indice} -> formatear_fila(indice, recorrido) end)
       |> Enum.join("\n")
 
-      contenido =
-        if filas == "" do
-          cabecera
-        else
-          cabecera <> filas <> "\n"
-        end
+    contenido =
+      if filas == "" do
+        cabecera
+      else
+        cabecera <> filas <> "\n"
+      end
 
     File.write!(ruta_salida, contenido)
   end

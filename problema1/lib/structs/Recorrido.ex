@@ -2,9 +2,9 @@ defmodule Recorrido do
   @moduledoc """
   Estructura que representa un camino de celdas y su consumo de energía.
 
-  Las posiciones se almacenan como coordenadas `{fila, columna}`. Durante la
-  búsqueda pueden estar en orden inverso; `normalizar_camino/1` las ordena desde
-  el inicio hasta la meta.
+  Las posiciones se almacenan como coordenadas `{fila, columna}` con origen en
+  cero. Durante la búsqueda pueden estar en orden inverso;
+  `normalizar_camino/1` las ordena desde el inicio hasta la meta.
   """
 
   @enforce_keys [:posiciones, :energia]
@@ -14,7 +14,7 @@ defmodule Recorrido do
   Recorrido por la cuadrícula y energía total consumida.
   """
   @type t :: %__MODULE__{
-          posiciones: [{pos_integer(), pos_integer()}],
+          posiciones: [{non_neg_integer(), non_neg_integer()}],
           energia: integer()
         }
 
