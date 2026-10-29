@@ -288,8 +288,9 @@ defmodule ValidadorEdificio do
     linea_limpia == "" or String.starts_with?(linea_limpia, "#")
   end
 
-  defp escribir_reporte(ruta, errores) do
+  defp escribir_reporte(ruta_salida, errores) do
+    GestorCarpetas.generar_directorio(ruta_salida)
     contenido = Enum.join(errores, "\n")
-    File.write!(ruta, contenido)
+    File.write!(ruta_salida, contenido)
   end
 end

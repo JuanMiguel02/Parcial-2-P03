@@ -1,5 +1,6 @@
 defmodule ReporteCSV do
-  def generar(recorridos, ruta_salida) do
+  def generar(recorridos, ruta_salida \\ "salidas/recorridos_rescate.csv") do
+    GestorCarpetas.generar_directorio(ruta_salida)
     cabecera = "id;movimientos;energia;posiciones\n"
 
     filas =

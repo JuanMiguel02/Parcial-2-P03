@@ -11,7 +11,8 @@ defmodule GeneradorSVG do
     "A" => "#3498DB"
   }
 
-  def generar(datos_juego, resultado_analisis, archivo_salida \\ "ruta_optima.svg") do
+  def generar(datos_juego, resultado_analisis, ruta_salida \\ "salidas/ruta_optima.svg") do
+    GestorCarpetas.generar_directorio(ruta_salida)
     %{mapa: mapa} = datos_juego
 
     # Calculamos dimensiones dinámicas a partir de las claves {fila, col}
@@ -44,7 +45,7 @@ defmodule GeneradorSVG do
     </svg>
     """
 
-    File.write!(archivo_salida, svg)
+    File.write!(ruta_salida, svg)
   end
 
   defp dibujar_celda(%Terreno{simbolo: simbolo, nombre: nombre}, col, fila) do
