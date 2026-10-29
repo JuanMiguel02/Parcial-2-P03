@@ -1,6 +1,17 @@
 defmodule GestorCarpetas do
+  @moduledoc """
+  Proporciona utilidades para preparar directorios de archivos de salida.
+  """
+
   @doc """
-  Garantiza que la carpeta de destino exista antes de intentar escribir archivos en ella.
+  Crea el directorio padre de una ruta de archivo, incluidos sus padres.
+
+  Devuelve `:ok` cuando el directorio existe o se pudo crear. Propaga como
+  excepción los errores de sistema de archivos.
+
+  ## Parámetros
+
+    * `ruta_archivo` - ruta del archivo cuyo directorio padre se necesita.
   """
   def generar_directorio(ruta_archivo) do
     directorio = Path.dirname(ruta_archivo)

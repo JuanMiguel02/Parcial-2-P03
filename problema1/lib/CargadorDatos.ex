@@ -1,4 +1,28 @@
 defmodule CargadorDatos do
+  @moduledoc """
+  Carga los archivos de batería, catálogo de terrenos y cuadrícula.
+
+  Convierte sus contenidos en un mapa de datos listo para `Buscador`, con el
+  presupuesto de batería, el catálogo de `%Terreno{}`, la cuadrícula indexada
+  por coordenadas y las posiciones de inicio y meta.
+  """
+
+  @doc """
+  Carga y combina los datos de entrada de la aplicación.
+
+  Devuelve `{:ok, datos}`, donde `datos` contiene las claves `:bateria`,
+  `:catalogo`, `:mapa`, `:inicio` y `:meta`.
+
+  ## Parámetros
+
+    * `ruta_bateria` - ruta al archivo con el presupuesto de batería.
+    * `ruta_terrenos` - ruta al catálogo CSV de terrenos.
+    * `ruta_cuadricula` - ruta al archivo de la cuadrícula.
+
+  Se espera que los archivos hayan sido validados previamente. Los errores de
+  lectura o conversión se propagan como excepciones de las funciones utilizadas
+  para procesarlos.
+  """
   def cargar_todo(ruta_bateria, ruta_terrenos, ruta_cuadricula) do
     presupuesto_bateria = cargar_bateria(ruta_bateria)
     terrenos = cargar_terrenos(ruta_terrenos)

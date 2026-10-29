@@ -1,4 +1,12 @@
 defmodule Buscador do
+  @moduledoc """
+  Encuentra los recorridos válidos entre el inicio y la meta de una cuadrícula.
+
+  La búsqueda usa backtracking, explora vecinos en el orden arriba, derecha,
+  abajo e izquierda, y descarta rutas que repiten posiciones o exceden el
+  presupuesto de batería.
+  """
+
   @direcciones [
     {-1, 0},
     {0, 1},
@@ -6,6 +14,13 @@ defmodule Buscador do
     {0, -1}
   ]
 
+  @doc """
+  Busca todos los recorridos que respetan la transitabilidad y el presupuesto.
+
+  El mapa de entrada debe incluir `:bateria`, `:mapa`, `:inicio` y `:meta`, tal
+  como los produce `CargadorDatos.cargar_todo/3`. Devuelve una lista de
+  `%Recorrido{}`; si no existe ninguna ruta válida, devuelve `[]`.
+  """
   def buscar_todos_los_recorridos(%{
     bateria: presupuesto_bateria,
     mapa: mapa_coordenadas,

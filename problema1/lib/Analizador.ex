@@ -1,15 +1,23 @@
 defmodule Analizador do
   @moduledoc """
-  Procesa la lista de %Recorrido{} generada por el Buscador para calcular
-  las metricas requeridas: totales, mínimos de movimientos, mínimos de energía
-  y selección de la ruta óptima para el SVG.
+  Calcula métricas de los recorridos encontrados por `Buscador`.
+
+  Para una lista no vacía, `analizar/1` devuelve el total de recorridos, los
+  recorridos con menos movimientos y los de menor energía. También selecciona
+  el primer recorrido de menor energía para usarlo como ruta del SVG.
   """
 
   @doc """
-  Analiza la lista de recorridos y retorna un mapa estructurado con las métricas.
+  Analiza recorridos y devuelve sus métricas agrupadas en un mapa.
 
-  Si la lista está vacía, retorna `{:error, :sin_recorridos}`.
-  Si existen rutas válidas, retorna `{:ok, %{total: int, menos_movimientos: list, menor_energia: list, ruta_optima_svg: struct}}`.
+  Devuelve `{:error, :sin_recorridos}` para una lista vacía. Para una lista no
+  vacía, devuelve `{:ok, metricas}`, donde `metricas` incluye `:total`,
+  `:menos_movimientos`, `:movimientos_minimos`, `:menor_energia`,
+  `:energia_minima` y `:ruta_optima_svg`.
+
+  ## Parámetros
+
+    * `recorridos` - lista de estructuras `%Recorrido{}`.
   """
   def analizar([]) do
     {:error, :sin_recorridos}
@@ -46,8 +54,10 @@ defmodule Analizador do
   end
 
   @doc """
-  Calcula la cantidad de movimientos realizados en un recorrido.
-  Dado que 'posiciones' incluye la celda inicial 'S', los movimientos equivalen a posiciones - 1.
+  Calcula la cantidad de movimientos de un `%Recorrido{}`.
+
+  Como `posiciones` incluye la celda inicial, el número de movimientos es la
+  cantidad de posiciones menos uno. El resultado nunca es negativo.
   """
   def calcular_movimientos(%Recorrido{posiciones: posiciones}) do
     max(0, length(posiciones) - 1)

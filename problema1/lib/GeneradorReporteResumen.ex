@@ -1,4 +1,22 @@
 defmodule ReporteResumen do
+  @moduledoc """
+  Presenta las métricas de la búsqueda en la consola y en un archivo de texto.
+
+  El resumen informa si no se encontraron rutas o lista las rutas con menos
+  movimientos y las de menor consumo de energía.
+  """
+
+  @doc """
+  Imprime y guarda un resumen del resultado de `Analizador.analizar/1`.
+
+  Crea el directorio de destino si aún no existe. Si `ruta_salida` se omite,
+  escribe en `salidas/resumen_rescate.txt`.
+
+  ## Parámetros
+
+    * `resultado_analisis` - `{:error, :sin_recorridos}` o `{:ok, metricas}`.
+    * `ruta_salida` - ruta del archivo de texto que se generará.
+  """
   def generar(resultado_analisis, ruta_salida \\ "salidas/resumen_rescate.txt") do
     GestorCarpetas.generar_directorio(ruta_salida)
     contenido = construir_resumen(resultado_analisis)

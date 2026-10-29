@@ -17,16 +17,31 @@
 end)
 
 defmodule Principal do
-  @carpeta_salida "salidas"
   @moduledoc """
-  Punto de entrada general de la aplicación.
-  Orquesta la ejecución secuencial entre la auditoría, carga, búsqueda,
-  análisis y generación de salidas (CSV, TXT, SVG).
+  Punto de entrada de la aplicación de recorridos del problema 1.
+
+  Orquesta la validación y carga de datos, la búsqueda y el análisis de rutas,
+  y la generación de los reportes CSV, TXT y SVG en la carpeta `salidas`.
   """
+
+  @carpeta_salida "salidas"
 
   @doc """
   Ejecuta el flujo completo de la aplicación.
-  Soporta rutas personalizadas para los archivos de entrada y salida.
+
+  Los argumentos permiten indicar rutas alternativas para los archivos de
+  entrada; si se omiten, se usan los archivos de `problema1/data`. Los reportes
+  se escriben en la carpeta `salidas` junto al script.
+
+  Devuelve `:ok` si la validación y el procesamiento terminan correctamente, o
+  `{:error, :validacion_fallida}` si los archivos no pasan la validación. Los
+  errores de lectura o escritura del sistema de archivos se propagan.
+
+  ## Parámetros
+
+    * `ruta_bateria` - ruta al archivo con el presupuesto de batería.
+    * `ruta_terrenos` - ruta al catálogo CSV de terrenos.
+    * `ruta_cuadricula` - ruta al archivo de la cuadrícula.
   """
   def main(
         ruta_bateria \\ Path.join(__DIR__, "data/bateria.txt"),
@@ -76,12 +91,12 @@ defmodule Principal do
         IO.puts("   -> Archivo 'recorridos_rescate.csv' generado.")
 
         # Resumen impreso y en TXT
-        ReporteResumen.generar( resultado_analisis, ruta_txt)
+        ReporteResumen.generar(resultado_analisis, ruta_txt)
 
         IO.puts("   -> Archivo 'resumen_rescate.txt' generado.")
 
         # Plano SVG (mapa + ruta de menor energía o leyenda)
-        GeneradorSVG.generar(datos_juego,resultado_analisis,ruta_svg )
+        GeneradorSVG.generar(datos_juego, resultado_analisis, ruta_svg)
 
         IO.puts("   -> Gráfico 'ruta_optima.svg' generado.")
         IO.puts("\nArchivos generados con éxito en la carpeta '#{@carpeta_salida}/'.")

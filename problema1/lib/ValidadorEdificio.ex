@@ -1,4 +1,25 @@
 defmodule ValidadorEdificio do
+  @moduledoc """
+  Valida los archivos de entrada de la aplicación de recorridos.
+
+  Comprueba que la batería sea un entero positivo, que el catálogo no repita
+  símbolos y que la cuadrícula sea rectangular, use símbolos conocidos, tenga
+  el borde compuesto por paredes y contenga exactamente un inicio y una meta.
+  """
+
+  @doc """
+  Valida los archivos de batería, terrenos y cuadrícula.
+
+  Devuelve `:ok` cuando todos los datos son válidos. Si encuentra errores,
+  escribe sus mensajes en `ruta_reporte` y devuelve `:error`.
+
+  ## Parámetros
+
+    * `ruta_bateria` - ruta al archivo con el presupuesto de batería.
+    * `ruta_terrenos` - ruta al catálogo CSV de terrenos.
+    * `ruta_cuadricula` - ruta al archivo de la cuadrícula.
+    * `ruta_reporte` - ruta del archivo donde se guardarán los errores.
+  """
   def validar_todo(ruta_bateria, ruta_terrenos, ruta_cuadricula, ruta_reporte) do
     resultado_bateria = validar_bateria(ruta_bateria)
     resultado_terrenos = validar_terrenos(ruta_terrenos)

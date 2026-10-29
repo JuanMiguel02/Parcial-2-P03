@@ -1,4 +1,10 @@
 defmodule GeneradorSVG do
+  @moduledoc """
+  Genera una imagen SVG de la cuadrícula y resalta la ruta óptima.
+
+  Cuando no hay recorridos válidos, muestra una leyenda en lugar de una ruta.
+  """
+
   @tamano 40
 
   # Colores por defecto para cada símbolo
@@ -11,6 +17,18 @@ defmodule GeneradorSVG do
     "A" => "#3498DB"
   }
 
+  @doc """
+  Escribe un SVG del mapa y del resultado del análisis.
+
+  Crea el directorio de destino si aún no existe. Si `ruta_salida` se omite,
+  escribe en `salidas/ruta_optima.svg`.
+
+  ## Parámetros
+
+    * `datos_juego` - mapa producido por `CargadorDatos.cargar_todo/3`.
+    * `resultado_analisis` - resultado de `Analizador.analizar/1`.
+    * `ruta_salida` - ruta del archivo SVG que se generará.
+  """
   def generar(datos_juego, resultado_analisis, ruta_salida \\ "salidas/ruta_optima.svg") do
     GestorCarpetas.generar_directorio(ruta_salida)
     %{mapa: mapa} = datos_juego
