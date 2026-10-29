@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200">
+  <style>
+    .texto-celda { font-family: sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; dominant-baseline: central; fill: #111; }
+    .linea-ruta { stroke: #8E44AD; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; fill: none; opacity: 0.85; }
+    .leyenda { font-family: sans-serif; font-size: 26px; font-weight: bold; fill: #C0392B; text-anchor: middle; dominant-baseline: central; }
+  </style>
+  <rect width="100%" height="100%" fill="white"/>
+  <rect x="0" y="0" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (1, 1)</title>
+</rect>
+<text x="20" y="20" class="texto-celda">X</text>
+
+<rect x="40" y="0" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (1, 2)</title>
+</rect>
+<text x="60" y="20" class="texto-celda">X</text>
+
+<rect x="80" y="0" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (1, 3)</title>
+</rect>
+<text x="100" y="20" class="texto-celda">X</text>
+
+<rect x="120" y="0" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (1, 4)</title>
+</rect>
+<text x="140" y="20" class="texto-celda">X</text>
+
+<rect x="160" y="0" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (1, 5)</title>
+</rect>
+<text x="180" y="20" class="texto-celda">X</text>
+
+<rect x="200" y="0" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (1, 6)</title>
+</rect>
+<text x="220" y="20" class="texto-celda">X</text>
+
+<rect x="0" y="40" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (2, 1)</title>
+</rect>
+<text x="20" y="60" class="texto-celda">X</text>
+
+<rect x="40" y="40" width="40" height="40" fill="#2ECC71" stroke="#dddddd" stroke-width="0.5">
+  <title>inicio (2, 2)</title>
+</rect>
+<text x="60" y="60" class="texto-celda">S</text>
+
+<rect x="80" y="40" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (2, 3)</title>
+</rect>
+<text x="100" y="60" class="texto-celda">.</text>
+
+<rect x="120" y="40" width="40" height="40" fill="#F39C12" stroke="#dddddd" stroke-width="0.5">
+  <title>lodo (2, 4)</title>
+</rect>
+<text x="140" y="60" class="texto-celda">L</text>
+
+<rect x="160" y="40" width="40" height="40" fill="#E74C3C" stroke="#dddddd" stroke-width="0.5">
+  <title>meta (2, 5)</title>
+</rect>
+<text x="180" y="60" class="texto-celda">M</text>
+
+<rect x="200" y="40" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (2, 6)</title>
+</rect>
+<text x="220" y="60" class="texto-celda">X</text>
+
+<rect x="0" y="80" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (3, 1)</title>
+</rect>
+<text x="20" y="100" class="texto-celda">X</text>
+
+<rect x="40" y="80" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (3, 2)</title>
+</rect>
+<text x="60" y="100" class="texto-celda">.</text>
+
+<rect x="80" y="80" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (3, 3)</title>
+</rect>
+<text x="100" y="100" class="texto-celda">X</text>
+
+<rect x="120" y="80" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (3, 4)</title>
+</rect>
+<text x="140" y="100" class="texto-celda">.</text>
+
+<rect x="160" y="80" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (3, 5)</title>
+</rect>
+<text x="180" y="100" class="texto-celda">.</text>
+
+<rect x="200" y="80" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (3, 6)</title>
+</rect>
+<text x="220" y="100" class="texto-celda">X</text>
+
+<rect x="0" y="120" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (4, 1)</title>
+</rect>
+<text x="20" y="140" class="texto-celda">X</text>
+
+<rect x="40" y="120" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (4, 2)</title>
+</rect>
+<text x="60" y="140" class="texto-celda">.</text>
+
+<rect x="80" y="120" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (4, 3)</title>
+</rect>
+<text x="100" y="140" class="texto-celda">.</text>
+
+<rect x="120" y="120" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (4, 4)</title>
+</rect>
+<text x="140" y="140" class="texto-celda">.</text>
+
+<rect x="160" y="120" width="40" height="40" fill="#ECF0F1" stroke="#dddddd" stroke-width="0.5">
+  <title>pasillo (4, 5)</title>
+</rect>
+<text x="180" y="140" class="texto-celda">.</text>
+
+<rect x="200" y="120" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (4, 6)</title>
+</rect>
+<text x="220" y="140" class="texto-celda">X</text>
+
+<rect x="0" y="160" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (5, 1)</title>
+</rect>
+<text x="20" y="180" class="texto-celda">X</text>
+
+<rect x="40" y="160" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (5, 2)</title>
+</rect>
+<text x="60" y="180" class="texto-celda">X</text>
+
+<rect x="80" y="160" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (5, 3)</title>
+</rect>
+<text x="100" y="180" class="texto-celda">X</text>
+
+<rect x="120" y="160" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (5, 4)</title>
+</rect>
+<text x="140" y="180" class="texto-celda">X</text>
+
+<rect x="160" y="160" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (5, 5)</title>
+</rect>
+<text x="180" y="180" class="texto-celda">X</text>
+
+<rect x="200" y="160" width="40" height="40" fill="#2C3E50" stroke="#dddddd" stroke-width="0.5">
+  <title>pared (5, 6)</title>
+</rect>
+<text x="220" y="180" class="texto-celda">X</text>
+
+  <polyline points="60,60 100,60 140,60 180,60" class="linea-ruta" />
+
+</svg>
