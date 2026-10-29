@@ -3,7 +3,7 @@ defmodule ValidadorEdificio do
     resultado_bateria = validar_bateria(ruta_bateria)
     resultado_terrenos = validar_terrenos(ruta_terrenos)
 
-    resuñtadp_cuadricula =
+    resultado_cuadricula =
       case resultado_terrenos do
         {:ok, simbolos} -> validar_cuadricula(ruta_cuadricula, simbolos)
         {:error, _errores} -> {:error, []}
@@ -15,14 +15,9 @@ defmodule ValidadorEdificio do
         obtener_errores(resultado_cuadricula)
 
     if todos_los_errores == [] do
-      {:ok,
-       %{
-         bateria: elem(resultado_bateria, 1),
-         terrenos: elem(resultado_terrenos, 1),
-         cuadricula: elem(resultado_cuadricula, 1)
-       }}
+      :ok
     else
-      escribir_reporte_errores(ruta_reporte, todos_los_errores)
+      escribir_reporte(ruta_reporte, todos_los_errores)
       :error
     end
   end
@@ -52,7 +47,7 @@ defmodule ValidadorEdificio do
               error =
                 "#{ruta}: (Línea #{num_linea}): B debe ser un único entero positivo (obtenido: '#{valor_str}'). "
 
-              {:eror, [error]}
+              {:error, [error]}
           end
 
         [] ->
@@ -98,7 +93,7 @@ defmodule ValidadorEdificio do
 
   defp validar_terrenos_rec([], simbolos, errores) do
     if errores == [] do
-      {{:ok, simbolos}, []}
+      {:ok, simbolos}
     else
       {:error, Enum.reverse(errores)}
     end
@@ -168,7 +163,7 @@ defmodule ValidadorEdificio do
         else: errores
 
     if errores == [] do
-      {{:ok, :validado}, []}
+      {:ok, :validado}
     else
       {:error, Enum.reverse(errores)}
     end
@@ -182,25 +177,24 @@ defmodule ValidadorEdificio do
     else
       simbolos_fila = String.split(linea, ~r/\s+/, trim: true)
       ancho_actual = length(simbolos_fila)
+      es_primera_o_ultima = ancho_esperado == nil or resto == []
 
       ancho_esperado = ancho_esperado || ancho_actual
 
       error_ancho =
         if ancho_actual != ancho_esperado do
           [
-            "Línea #{num_linea_fisica}: La fila no coincide con el ancho de la cuadrícula (esperado #{ancho_esperado} columnas, obtenido #{ancho_actual})."
+            "Línea #{num_linea}: La fila no coincide con el ancho de la cuadrícula (esperado #{ancho_esperado} columnas, obtenido #{ancho_actual})."
           ]
         else
           []
         end
 
-      es_primera_o_ultima = ancho_esperado == nil or resto == []
-
       # Se procesa la lista de símbolos puros en validar_celdas_rec
       {nuevo_conteo, err_celdas} =
         validar_celdas_rec(
           simbolos_fila,
-          num_linea_fisica,
+          num_linea,
           1,
           es_primera_o_ultima,
           ancho_actual,

@@ -31,7 +31,7 @@ defmodule Buscador do
 
   defp explorar(pos_meta, pos_meta, _mapa, _bateria, recorrido_actual, _visitados) do
     # Cuando alcanzamos la meta, normalizamos el recorrido (invirtiendo la lista)
-    [Recorrido.normalizar(recorrido_actual)]
+    [Recorrido.normalizar_camino(recorrido_actual)]
   end
 
   # ===================================================================
@@ -104,6 +104,18 @@ defmodule Buscador do
   # ===================================================================
   # Evaluacion de Terreno mediante Pattern Matching
   # ===================================================================
+
+  defp evaluar_direcciones(
+         [],
+         _pos_actual,
+         _pos_meta,
+         _mapa,
+         _bateria,
+         _recorrido,
+         _visitados,
+         recorridos_acumulados
+       ),
+       do: recorridos_acumulados
 
   # Pattern Matching 1: Terreno Fuera de Límites (nil) -> Rechazado
   defp evaluar_paso_terreno(

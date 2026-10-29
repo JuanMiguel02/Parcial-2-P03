@@ -1,11 +1,12 @@
-defmodule CargadorDAtos do
+defmodule CargadorDatos do
   def cargar_todo(ruta_bateria, ruta_terrenos, ruta_cuadricula) do
-    bateria = cargar_bateria(ruta_bateria)
+    presupuesto_bateria = cargar_bateria(ruta_bateria)
     terrenos = cargar_terrenos(ruta_terrenos)
 
     {mapa_coordenadas, pos_inicio, pos_meta} =
       cargar_cuadricula(ruta_cuadricula, terrenos)
-      {:ok,
+
+    {:ok,
      %{
        bateria: presupuesto_bateria,
        catalogo: terrenos,
@@ -77,7 +78,7 @@ defmodule CargadorDAtos do
     if String.starts_with?(linea_limpia, ">") do
       procesar_filas_recursivo(resto_filas, terrenos, mapa_acumulado, pos_inicio, pos_meta)
     else
-      simbolos_fila = String.split(contenido_linea, ~r/\s+/, trim: true)[cite: 1]
+      simbolos_fila = String.split(contenido_linea, ~r/\s+/, trim: true)
 
       {nuevo_mapa, nuevo_inicio, nueva_meta} =
         procesar_columnas_recursivo(
@@ -116,7 +117,7 @@ defmodule CargadorDAtos do
          pos_meta
        ) do
     coordenada_actual = {linea_fisica, columna_actual}
-    terreno = Map.get(catalogo_terrenos, simbolo_actual)
+    terreno = Map.get(terrenos, simbolo_actual)
 
     mapa_actualizado = Map.put(mapa_acumulado, coordenada_actual, terreno)
 

@@ -1,4 +1,4 @@
-defmodule ReporteResuen do
+defmodule ReporteResumen do
   def generar(resultado_analisis, ruta_salida) do
     contenido = construir_resumen(resultado_analisis)
 

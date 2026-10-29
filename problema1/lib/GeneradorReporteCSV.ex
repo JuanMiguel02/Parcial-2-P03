@@ -25,4 +25,9 @@ defmodule ReporteCSV do
     "#{indice};#{movimientos};#{energia};#{posiciones_fmt}"
   end
 
+  defp formatear_posiciones(posiciones) do
+    posiciones
+    |> Enum.map(fn {f, c} -> "(#{f},#{c})" end)
+    |> Enum.join("->")
+  end
 end
