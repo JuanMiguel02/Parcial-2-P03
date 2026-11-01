@@ -1,0 +1,12 @@
+=== RESUMEN DE COINCIDENCIAS ADN ===
+
+[Conteo por Muestra y Motivo]:
+Muestra: muestra_1 | Motivo: ACG -> 3 coincidencia(s)
+Muestra: muestra_1 | Motivo: TAC -> 2 coincidencia(s)
+Muestra: muestra_1 | Motivo: GGA -> 2 coincidencia(s)
+Muestra: muestra_2 | Motivo: ACG -> 2 coincidencia(s)
+Muestra: muestra_2 | Motivo: TAC -> 2 coincidencia(s)
+Muestra: muestra_2 | Motivo: GGA -> 3 coincidencia(s)
+
+[Motivos que NO aparecieron]:
+Ninguno.

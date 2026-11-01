@@ -1,0 +1,4 @@
+ACG
+TAC
+GGA
+acg
