@@ -31,10 +31,10 @@ jobs:
           echo "=== EJECUTANDO PROBLEMA 1 ==="
           elixir -pa ebin problema1/main.exs
 
-      - name: Ejecutar Problema 2
+      - name: Ejecutar Problema 3
         run: |
           echo "=== EJECUTANDO PROBLEMA 2 ==="
-          elixir -pa ebin problema2/main.exs
+          elixir -pa ebin problema3/main.exs
 
       - name: Reportar en consola si falló
         if: failure()
