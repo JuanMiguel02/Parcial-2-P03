@@ -20,17 +20,20 @@ defmodule GeneradorSVG do
   @doc """
   Escribe un SVG del mapa y del resultado del análisis.
 
-  Crea el directorio de destino si aún no existe. Si `ruta_salida` se omite,
-  escribe en `salidas/ruta_optima.svg`.
+  Resalta la ruta de menor energía o, si no hay recorridos, muestra una leyenda.
+  Si `ruta_salida` se omite, escribe en `salidas/ruta_optima.svg`. La carpeta
+  de destino debe existir; los errores de escritura se propagan mediante
+  `File.write!/2`.
 
   ## Parámetros
 
     * `datos_juego` - mapa producido por `CargadorDatos.cargar_todo/3`.
     * `resultado_analisis` - resultado de `Analizador.analizar/1`.
     * `ruta_salida` - ruta del archivo SVG que se generará.
+
+  Devuelve `:ok` cuando el archivo se escribe correctamente.
   """
   def generar(datos_juego, resultado_analisis, ruta_salida \\ "salidas/ruta_optima.svg") do
-    GestorCarpetas.generar_directorio(ruta_salida)
     %{mapa: mapa} = datos_juego
 
     # Calculamos dimensiones dinámicas a partir de las claves {fila, col}
@@ -38,8 +41,8 @@ defmodule GeneradorSVG do
     max_f = coordenadas |> Enum.map(&elem(&1, 0)) |> Enum.max()
     max_c = coordenadas |> Enum.map(&elem(&1, 1)) |> Enum.max()
 
-    ancho = max_c * @tamano
-    alto = max_f * @tamano
+    ancho = (max_c + 1) * @tamano
+    alto = (max_f + 1) * @tamano
 
     # Dibujamos las celdas directamente desde el mapa de coordenadas
     celdas =
@@ -67,9 +70,11 @@ defmodule GeneradorSVG do
   end
 
   defp dibujar_celda(%Terreno{simbolo: simbolo, nombre: nombre}, col, fila) do
-    # Conversión a coordenadas base 0 para el lienzo SVG
-    px = (col - 1) * @tamano
-    py = (fila - 1) * @tamano
+    # Cálculo de la esquina superior izquierda de la celda {fila, col}:
+    px = col * @tamano
+    py = fila * @tamano
+
+    # Centro de la celda (para el texto y la línea polyline del camino):
     cx = px + div(@tamano, 2)
     cy = py + div(@tamano, 2)
 
@@ -89,8 +94,8 @@ defmodule GeneradorSVG do
     puntos =
       pos
       |> Enum.map(fn {f, c} ->
-        cx = (c - 1) * @tamano + div(@tamano, 2)
-        cy = (f - 1) * @tamano + div(@tamano, 2)
+        cx = c * @tamano + div(@tamano, 2)
+        cy = f * @tamano + div(@tamano, 2)
         "#{cx},#{cy}"
       end)
       |> Enum.join(" ")

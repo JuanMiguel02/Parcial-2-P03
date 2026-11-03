@@ -2,9 +2,10 @@ defmodule ValidadorEdificio do
   @moduledoc """
   Valida los archivos de entrada de la aplicación de recorridos.
 
-  Comprueba que la batería sea un entero positivo, que el catálogo no repita
-  símbolos y que la cuadrícula sea rectangular, use símbolos conocidos, tenga
-  el borde compuesto por paredes y contenga exactamente un inicio y una meta.
+  Comprueba que la batería tenga un valor entero positivo, que el catálogo no
+  repita símbolos y que la cuadrícula sea rectangular, use símbolos conocidos,
+  tenga el borde compuesto por paredes y contenga exactamente un inicio y una
+  meta.
   """
 
   @doc """
@@ -155,20 +156,23 @@ defmodule ValidadorEdificio do
         |> Stream.with_index(1)
         |> Stream.map(fn {linea, indice} -> {String.trim_trailing(linea, "\r\n"), indice} end)
         |> Stream.reject(&comentario_o_vacia?/1)
+        |> Stream.reject(fn {linea, _indice} ->
+          String.starts_with?(String.trim_leading(linea), ">")
+        end)
 
       lineas_filtradas = Enum.to_list(cuadricula_stream)
 
       if lineas_filtradas == [] do
         {:error, ["Cuadrícula: El archivo está vacío o no contiene filas válidas."]}
       else
-        validar_lineas_rec(lineas_filtradas, nil, %{s: 0, m: 0}, todos_simbolos, [])
+        validar_lineas_rec(lineas_filtradas, 0, nil, %{s: 0, m: 0}, todos_simbolos, [])
       end
     else
       {:error, ["Cuadrícula: El archivo no existe."]}
     end
   end
 
-  defp validar_lineas_rec([], _ancho, %{s: s, m: m}, _simbolos, errores) do
+  defp validar_lineas_rec([], _fila_actual, _ancho, %{s: s, m: m}, _simbolos, errores) do
     errores =
       if s != 1,
         do: [
@@ -190,43 +194,51 @@ defmodule ValidadorEdificio do
     end
   end
 
-  defp validar_lineas_rec([{linea, num_linea} | resto], ancho_esperado, conteo, simbolos, errores) do
-    linea_limpia = String.trim_leading(linea)
+  defp validar_lineas_rec(
+         [{linea, num_linea} | resto],
+         fila_actual,
+         ancho_esperado,
+         conteo,
+         simbolos,
+         errores
+       ) do
+    simbolos_fila = String.split(linea, ~r/\s+/, trim: true)
+    ancho_actual = length(simbolos_fila)
+    es_primera_o_ultima = fila_actual == 0 or resto == []
 
-    if String.starts_with?(linea_limpia, ">") do
-      validar_lineas_rec(resto, ancho_esperado, conteo, simbolos, errores)
-    else
-      simbolos_fila = String.split(linea, ~r/\s+/, trim: true)
-      ancho_actual = length(simbolos_fila)
-      es_primera_o_ultima = ancho_esperado == nil or resto == []
+    ancho_esperado = ancho_esperado || ancho_actual
 
-      ancho_esperado = ancho_esperado || ancho_actual
+    error_ancho =
+      if ancho_actual != ancho_esperado do
+        [
+          "Línea #{num_linea}: La fila no coincide con el ancho de la cuadrícula (esperado #{ancho_esperado} columnas, obtenido #{ancho_actual})."
+        ]
+      else
+        []
+      end
 
-      error_ancho =
-        if ancho_actual != ancho_esperado do
-          [
-            "Línea #{num_linea}: La fila no coincide con el ancho de la cuadrícula (esperado #{ancho_esperado} columnas, obtenido #{ancho_actual})."
-          ]
-        else
-          []
-        end
+    {nuevo_conteo, err_celdas} =
+      validar_celdas_rec(
+        simbolos_fila,
+        fila_actual,
+        0,
+        es_primera_o_ultima,
+        ancho_actual,
+        conteo,
+        simbolos,
+        []
+      )
 
-      # Se procesa la lista de símbolos puros en validar_celdas_rec
-      {nuevo_conteo, err_celdas} =
-        validar_celdas_rec(
-          simbolos_fila,
-          num_linea,
-          1,
-          es_primera_o_ultima,
-          ancho_actual,
-          conteo,
-          simbolos,
-          []
-        )
+    nuevos_errores = error_ancho ++ err_celdas ++ errores
 
-      nuevos_errores = error_ancho ++ err_celdas ++ errores
-      validar_lineas_rec(resto, ancho_esperado, nuevo_conteo, simbolos, nuevos_errores)
-    end
+    validar_lineas_rec(
+      resto,
+      fila_actual + 1,
+      ancho_esperado,
+      nuevo_conteo,
+      simbolos,
+      nuevos_errores
+    )
   end
 
   # ===================================================================
@@ -235,7 +247,7 @@ defmodule ValidadorEdificio do
 
   defp validar_celdas_rec(
          _simbolos_restantes = [],
-         _linea_fisica,
+         _fila_actual,
          _columna_actual,
          _es_fila_borde?,
          _total_columnas,
@@ -248,7 +260,7 @@ defmodule ValidadorEdificio do
 
   defp validar_celdas_rec(
          [simbolo_actual | resto_simbolos],
-         linea_fisica,
+         fila_actual,
          columna_actual,
          es_fila_borde?,
          total_columnas,
@@ -257,14 +269,14 @@ defmodule ValidadorEdificio do
          errores_acumulados
        ) do
     # Identificación clara de la posición en el contorno
-    es_columna_borde? = columna_actual == 1 or columna_actual == total_columnas
+    es_columna_borde? = columna_actual == 0 or columna_actual == total_columnas - 1
     es_posicion_borde? = es_fila_borde? or es_columna_borde?
 
     # Regla 1: Todo el borde exterior debe ser estrictamente 'X'
     error_borde =
       if es_posicion_borde? and simbolo_actual != "X" do
         [
-          "Coordenada (#{linea_fisica}, #{columna_actual}): El borde exterior debe ser 'X' (encontrado '#{simbolo_actual}')."
+          "Coordenada (#{fila_actual}, #{columna_actual}): El borde exterior debe ser 'X' (encontrado '#{simbolo_actual}')."
         ]
       else
         []
@@ -274,7 +286,7 @@ defmodule ValidadorEdificio do
     error_simbolo =
       if not MapSet.member?(simbolos_permitidos, simbolo_actual) do
         [
-          "Coordenada (#{linea_fisica}, #{columna_actual}): El símbolo '#{simbolo_actual}' no está definido en terrenos.csv."
+          "Coordenada (#{fila_actual}, #{columna_actual}): El símbolo '#{simbolo_actual}' no está definido en terrenos.csv."
         ]
       else
         []
@@ -289,7 +301,7 @@ defmodule ValidadorEdificio do
     # Siguiente columna en la fila
     validar_celdas_rec(
       resto_simbolos,
-      linea_fisica,
+      fila_actual,
       columna_actual + 1,
       es_fila_borde?,
       total_columnas,

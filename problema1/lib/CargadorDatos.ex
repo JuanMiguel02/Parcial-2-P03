@@ -42,7 +42,7 @@ defmodule CargadorDatos do
 
   defp cargar_bateria(ruta_archivo) do
     File.stream!(ruta_archivo)
-    |> Stream.with_index(1)
+    |> Stream.with_index()
     |> Stream.map(fn {linea, indice} -> {String.trim(linea), indice} end)
     |> Stream.reject(&linea_vacia_o_comentario?/1)
     |> Enum.take(1)
@@ -55,7 +55,7 @@ defmodule CargadorDatos do
   defp cargar_terrenos(ruta_archivo) do
     terrenos_base =
       File.stream!(ruta_archivo)
-      |> Stream.with_index(1)
+      |> Stream.with_index()
       |> Stream.map(fn {linea, indice} -> {String.trim(linea), indice} end)
       |> Stream.reject(fn {linea, _indice} ->
         String.downcase(linea) =~ "simbolo"
@@ -65,7 +65,7 @@ defmodule CargadorDatos do
         Map.put(acumulador, terreno.simbolo, terreno)
       end)
 
-      terrenos_base
+    terrenos_base
     |> Map.put_new("S", Terreno.inicio())
     |> Map.put_new("M", Terreno.meta())
   end
@@ -73,17 +73,17 @@ defmodule CargadorDatos do
   defp cargar_cuadricula(ruta_archivo, terrenos) do
     stream_lineas =
       File.stream!(ruta_archivo)
-      |> Stream.with_index(1)
+      |> Stream.with_index()
       |> Stream.map(fn {linea, idx} -> {String.trim_trailing(linea, "\r\n"), idx} end)
       |> Stream.reject(&linea_vacia_o_comentario?/1)
 
-      procesar_filas_recursivo(
-        Enum.to_list(stream_lineas),
-        terrenos,
-        _mapa_acumulado = %{},
-        _pos_inicio = nil,
-        _pos_mea = nil
-      )
+    procesar_filas_recursivo(
+      Enum.to_list(stream_lineas),
+      terrenos,
+      _mapa_acumulado = %{},
+      _pos_inicio = nil,
+      _pos_mea = nil
+    )
   end
 
   defp procesar_filas_recursivo([], _terrenos, mapa_acumulado, pos_inicio, pos_meta) do
@@ -108,7 +108,7 @@ defmodule CargadorDatos do
         procesar_columnas_recursivo(
           simbolos_fila,
           numero_linea_fisica,
-          _columna_inicial = 1,
+          _columna_inicial = 0,
           terrenos,
           mapa_acumulado,
           pos_inicio,
