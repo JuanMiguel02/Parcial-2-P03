@@ -89,10 +89,9 @@ defmodule Principal do
 
         case resultado_expansion do
           {:ok, _estado_final} ->
-            # 3. Exploración mediante Backtracking
-        IO.puts(
-          "3. Explorando rutas con backtracking (orden: Arriba, Derecha, Abajo, Izquierda)...\n"
-        )
+        # 3. Exploración mediante Backtracking
+        IO.puts("3. Explorando rutas con backtracking (orden: Arriba, Derecha, Abajo, Izquierda)...\n")
+
         recorridos = Buscador.buscar_todos_los_recorridos(datos_juego)
 
         # 4. Procesamiento de métricas y mínimos

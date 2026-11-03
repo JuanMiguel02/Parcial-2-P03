@@ -74,7 +74,7 @@ defmodule GeneradorSVG do
     px = col * @tamano
     py = fila * @tamano
 
-    # Centro de la celda (para el texto y la línea polyline del camino):
+    # Centro de la celda (para el texto y la línea del camino):
     cx = px + div(@tamano, 2)
     cy = py + div(@tamano, 2)
 
