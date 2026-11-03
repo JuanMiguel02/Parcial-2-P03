@@ -9,13 +9,16 @@ defmodule ReporteResumen do
   @doc """
   Imprime y guarda un resumen del resultado de `Analizador.analizar/1`.
 
-  Crea el directorio de destino si aún no existe. Si `ruta_salida` se omite,
-  escribe en `salidas/resumen_rescate.txt`.
+  Si `ruta_salida` se omite, escribe en `salidas/resumen_rescate.txt`.
+  La carpeta de destino debe existir; los errores de escritura se propagan
+  mediante `File.write!/2`.
 
   ## Parámetros
 
     * `resultado_analisis` - `{:error, :sin_recorridos}` o `{:ok, metricas}`.
     * `ruta_salida` - ruta del archivo de texto que se generará.
+
+  Devuelve `:ok` cuando el archivo se escribe correctamente.
   """
   def generar(resultado_analisis, ruta_salida \\ "salidas/resumen_rescate.txt") do
     contenido = construir_resumen(resultado_analisis)

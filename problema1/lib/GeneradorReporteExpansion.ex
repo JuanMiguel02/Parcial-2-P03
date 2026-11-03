@@ -10,6 +10,7 @@ defmodule ReporteExpansion do
   El reporte incluye cada estado distinto desde el inicial hasta el estado
   estable y se escribe en `ruta_salida`. La meta se considera alcanzable si
   aparece en el estado final con un costo menor o igual a `bateria`.
+  La carpeta de destino debe existir.
 
   ## Parámetros
 

@@ -2,9 +2,10 @@ defmodule ValidadorEdificio do
   @moduledoc """
   Valida los archivos de entrada de la aplicación de recorridos.
 
-  Comprueba que la batería sea un entero positivo, que el catálogo no repita
-  símbolos y que la cuadrícula sea rectangular, use símbolos conocidos, tenga
-  el borde compuesto por paredes y contenga exactamente un inicio y una meta.
+  Comprueba que la batería tenga un valor entero positivo, que el catálogo no
+  repita símbolos y que la cuadrícula sea rectangular, use símbolos conocidos,
+  tenga el borde compuesto por paredes y contenga exactamente un inicio y una
+  meta.
   """
 
   @doc """

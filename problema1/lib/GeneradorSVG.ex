@@ -20,14 +20,18 @@ defmodule GeneradorSVG do
   @doc """
   Escribe un SVG del mapa y del resultado del análisis.
 
-  Crea el directorio de destino si aún no existe. Si `ruta_salida` se omite,
-  escribe en `salidas/ruta_optima.svg`.
+  Resalta la ruta de menor energía o, si no hay recorridos, muestra una leyenda.
+  Si `ruta_salida` se omite, escribe en `salidas/ruta_optima.svg`. La carpeta
+  de destino debe existir; los errores de escritura se propagan mediante
+  `File.write!/2`.
 
   ## Parámetros
 
     * `datos_juego` - mapa producido por `CargadorDatos.cargar_todo/3`.
     * `resultado_analisis` - resultado de `Analizador.analizar/1`.
     * `ruta_salida` - ruta del archivo SVG que se generará.
+
+  Devuelve `:ok` cuando el archivo se escribe correctamente.
   """
   def generar(datos_juego, resultado_analisis, ruta_salida \\ "salidas/ruta_optima.svg") do
     %{mapa: mapa} = datos_juego
