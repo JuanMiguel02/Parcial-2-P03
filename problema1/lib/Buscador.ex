@@ -44,7 +44,7 @@ defmodule Buscador do
   # Caso Base: Llegada a la Meta 'M'
   # ===================================================================
 
-  defp explorar(pos_meta, pos_meta, _mapa, _bateria, recorrido_actual, _visitados) do
+  defp explorar(pos_actual, pos_meta, _mapa, _bateria, recorrido_actual, _visitados) when pos_actual == pos_meta do
     # Cuando alcanzamos la meta, normalizamos el recorrido (invirtiendo la lista)
     [Recorrido.normalizar_camino(recorrido_actual)]
   end
