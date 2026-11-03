@@ -30,7 +30,6 @@ defmodule GeneradorSVG do
     * `ruta_salida` - ruta del archivo SVG que se generará.
   """
   def generar(datos_juego, resultado_analisis, ruta_salida \\ "salidas/ruta_optima.svg") do
-    GestorCarpetas.generar_directorio(ruta_salida)
     %{mapa: mapa} = datos_juego
 
     # Calculamos dimensiones dinámicas a partir de las claves {fila, col}

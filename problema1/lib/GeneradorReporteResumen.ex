@@ -18,7 +18,6 @@ defmodule ReporteResumen do
     * `ruta_salida` - ruta del archivo de texto que se generará.
   """
   def generar(resultado_analisis, ruta_salida \\ "salidas/resumen_rescate.txt") do
-    GestorCarpetas.generar_directorio(ruta_salida)
     contenido = construir_resumen(resultado_analisis)
 
     IO.puts("\n" <> contenido)

@@ -1,0 +1,37 @@
+c:/Users/Juan Miguel/Desktop/parcial2-p03/problema1/data/bateria.txt: (Línea 1): B debe ser un único entero positivo (obtenido: '-1'). 
+Coordenada (0, 0): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (0, 0): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (0, 1): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (0, 1): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (0, 2): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (0, 2): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (0, 3): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (0, 3): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (0, 4): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (0, 4): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (0, 5): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (0, 5): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (1, 0): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (1, 0): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (1, 1): El símbolo 'P' no está definido en terrenos.csv.
+Coordenada (1, 4): El símbolo 'F' no está definido en terrenos.csv.
+Coordenada (1, 5): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (1, 5): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (2, 0): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (2, 0): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (2, 5): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (2, 5): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (3, 0): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (3, 0): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (3, 1): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (3, 1): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (3, 2): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (3, 2): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (3, 3): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (3, 3): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (3, 4): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (3, 4): El borde exterior debe ser 'X' (encontrado 'A').
+Coordenada (3, 5): El símbolo 'A' no está definido en terrenos.csv.
+Coordenada (3, 5): El borde exterior debe ser 'X' (encontrado 'A').
+Cuadrícula General: Debe haber exactamente un punto 'S' (encontrados: 0).
+Cuadrícula General: Debe haber exactamente un punto 'M' (encontrados: 0).
