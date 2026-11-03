@@ -22,11 +22,11 @@ defmodule Buscador do
   `%Recorrido{}`; si no existe ninguna ruta válida, devuelve `[]`.
   """
   def buscar_todos_los_recorridos(%{
-    bateria: presupuesto_bateria,
-    mapa: mapa_coordenadas,
-    inicio: pos_inicio,
-    meta: pos_meta
-  }) do
+        bateria: presupuesto_bateria,
+        mapa: mapa_coordenadas,
+        inicio: pos_inicio,
+        meta: pos_meta
+      }) do
     recorrido_inicial = Recorrido.nuevo([pos_inicio], 0)
     visitados_inicial = MapSet.new([pos_inicio])
 
@@ -181,8 +181,8 @@ defmodule Buscador do
         nuevos_visitados
       )
     else
-      [] # Rechazado por superar la batería B
+      # Rechazado por superar la batería B
+      []
     end
   end
-
 end

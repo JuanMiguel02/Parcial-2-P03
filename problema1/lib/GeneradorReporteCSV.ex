@@ -9,16 +9,18 @@ defmodule ReporteCSV do
   @doc """
   Escribe los recorridos en formato CSV separado por punto y coma.
 
-  Crea el directorio de destino si aún no existe. Si `ruta_salida` se omite,
-  escribe en `salidas/recorridos_rescate.csv`.
+  Si `ruta_salida` se omite, escribe en `salidas/recorridos_rescate.csv`.
+  La carpeta de destino debe existir; los errores de escritura se propagan
+  mediante `File.write!/2`.
 
   ## Parámetros
 
     * `recorridos` - lista de estructuras `%Recorrido{}`.
     * `ruta_salida` - ruta del archivo que se generará.
+
+  Devuelve `:ok` cuando el archivo se escribe correctamente.
   """
   def generar(recorridos, ruta_salida \\ "salidas/recorridos_rescate.csv") do
-    GestorCarpetas.generar_directorio(ruta_salida)
     cabecera = "id;movimientos;energia;posiciones\n"
 
     filas =
@@ -27,12 +29,12 @@ defmodule ReporteCSV do
       |> Stream.map(fn {recorrido, indice} -> formatear_fila(indice, recorrido) end)
       |> Enum.join("\n")
 
-      contenido =
-        if filas == "" do
-          cabecera
-        else
-          cabecera <> filas <> "\n"
-        end
+    contenido =
+      if filas == "" do
+        cabecera
+      else
+        cabecera <> filas <> "\n"
+      end
 
     File.write!(ruta_salida, contenido)
   end

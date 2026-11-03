@@ -31,14 +31,18 @@ defmodule Analizador do
       |> Enum.map(&calcular_movimientos/1)
       |> Enum.min()
 
-    menos_movimientos = Enum.filter(recorridos, fn recorrido -> calcular_movimientos(recorrido) == min_movimientos_valor end)
+    menos_movimientos =
+      Enum.filter(recorridos, fn recorrido ->
+        calcular_movimientos(recorrido) == min_movimientos_valor
+      end)
 
     min_energia_valor =
       recorridos
       |> Enum.map(& &1.energia)
       |> Enum.min()
 
-    menor_energia = Enum.filter(recorridos, fn recorrido -> recorrido.energia == min_energia_valor end)
+    menor_energia =
+      Enum.filter(recorridos, fn recorrido -> recorrido.energia == min_energia_valor end)
 
     ruta_optima_svg = List.first(menor_energia)
 

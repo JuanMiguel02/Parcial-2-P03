@@ -7,11 +7,11 @@ Total de recorridos encontrados: 6
 RECORRIDOS CON MENOS MOVIMIENTOS (3 pasos)
 --------------------------------------------------
   [Opción 1] Movimientos: 3 | Energía: 5
-   Ruta: (2,2)->(2,3)->(2,4)->(2,5)
+   Ruta: (1,1)->(1,2)->(1,3)->(1,4)
 
 --------------------------------------------------
 RECORRIDOS CON MENOR ENERGÍA (5 unidades)
 --------------------------------------------------
   [Opción 1] Movimientos: 3 | Energía: 5
-   Ruta: (2,2)->(2,3)->(2,4)->(2,5)
+   Ruta: (1,1)->(1,2)->(1,3)->(1,4)
 ==================================================
