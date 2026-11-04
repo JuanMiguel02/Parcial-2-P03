@@ -53,10 +53,10 @@ defmodule CargadorDatos do
   end
 
   defp cargar_terrenos(ruta_archivo) do
-    terrenos_base =
       File.stream!(ruta_archivo)
       |> Stream.with_index()
       |> Stream.map(fn {linea, indice} -> {String.trim(linea), indice} end)
+      |> Stream.reject(&linea_vacia_o_comentario?/1)
       |> Stream.reject(fn {linea, _indice} ->
         String.downcase(linea) =~ "simbolo"
       end)
@@ -64,10 +64,6 @@ defmodule CargadorDatos do
         terreno = Terreno.crear_desde_linea_csv(linea)
         Map.put(acumulador, terreno.simbolo, terreno)
       end)
-
-    terrenos_base
-    |> Map.put_new("S", Terreno.inicio())
-    |> Map.put_new("M", Terreno.meta())
   end
 
   defp cargar_cuadricula(ruta_archivo, terrenos) do
