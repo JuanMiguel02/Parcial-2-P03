@@ -145,11 +145,6 @@ defmodule ValidadorEdificio do
 
   defp validar_cuadricula(ruta, simbolos_permitidos) do
     if File.exists?(ruta) do
-      todos_simbolos =
-        simbolos_permitidos
-        |> MapSet.put("S")
-        |> MapSet.put("M")
-        |> MapSet.put("X")
 
       cuadricula_stream =
         File.stream!(ruta)
@@ -165,7 +160,7 @@ defmodule ValidadorEdificio do
       if lineas_filtradas == [] do
         {:error, ["Cuadrícula: El archivo está vacío o no contiene filas válidas."]}
       else
-        validar_lineas_rec(lineas_filtradas, 0, nil, %{s: 0, m: 0}, todos_simbolos, [])
+        validar_lineas_rec(lineas_filtradas, 0, nil, %{s: 0, m: 0}, simbolos_permitidos, [])
       end
     else
       {:error, ["Cuadrícula: El archivo no existe."]}
